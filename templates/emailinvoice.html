@@ -1,0 +1,37 @@
+<style>
+.container {
+  position: relative;
+}
+
+.bottomright {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
+</style>
+
+
+<div style="background-color: rgb(228, 228, 228);">
+    <div class="container" style="margin: 20px; background-color: #fff;">
+        <h1>Hi {{ user.username }},</h1>
+<p>Your order with order id: <b>{{order.order_id}}</b> has been placed successfully.</p>
+
+<h3>Your order consists of -</h3>
+{% for i in order_details %}
+<p>Product:{{i.item.title}} Quantity:{{i.quantity}} Price:{{i.item.price}}</p>
+{% endfor %}
+<h2>Total:{{amount}}</h2>
+
+<p>Order will reach to you in 5-7 days.</p>
+
+<p>We have attached the invoice for your order with this mail.</p>
+
+<p>Thanks for trusting us and using our services!</p>
+  <div style="bottomright">
+   <p>Sincerely,</p>
+   <p>Our Team</p>
+  </div>
+    </div>
+</div>

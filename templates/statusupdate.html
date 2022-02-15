@@ -1,0 +1,119 @@
+    {% extends 'base.html' %}
+
+
+    {% block content %}
+    <section class="ftco-section ftco-cart">
+			<div class="container">
+                    		<div class="row justify-content-end">
+    			<div class="col-lg-3 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3" style="text-align:center;">
+    					<h3>Total Orders</h3>
+						<hr>
+    					<p><b>{{order_count}}</b></p>
+    				</div>
+    			</div>
+    			<div class="col-lg-3 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3>Shipping Address</h3>
+						<hr>
+	              <div class="form-group">
+    					<p>Name: {{orders.shipping_address.first_name}} {{orders.shipping_address.first_name}}</p>
+	              </div>
+	              <div class="form-group">
+    					<p>Door No: {{orders.shipping_address.door_number}}</p>
+	              </div>
+	              <div class="form-group">
+    					<p>Street: {{orders.shipping_address.street}}</p>
+	              </div>
+	              <div class="form-group">
+    					<p>Town: {{orders.shipping_address.town}}</p>
+	              </div>
+	              <div class="form-group">
+    					<p>Pin Code: {{orders.shipping_address.zip_code}}</p>
+	              </div>
+    				</div>
+    			</div>
+    			<div class="col-lg-3 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3>Customer Details</h3>
+						<hr>
+    					<p class="d-flex">
+    						Email :
+    						<span class="ml-3">{{orders.user.email}}</span>
+    					</p>
+    					<p class="d-flex">
+    						Phone :
+    						<span class="ml-3">{{orders.user.phone}}</span>
+    					</p>
+    					<p class="d-flex">
+    						Name :
+    						<span class="ml-3">{{orders.user.username}}</span>
+    					</p>
+    				</div>
+    			</div>
+    			<div class="col-lg-3 mt-5 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3>Current Status</h3>
+						<hr>
+						                 <form method="POST" action="" >
+                    {% csrf_token %}
+                                         {% for form in form %}
+                                         {{ form }}
+                                         {% endfor %}
+                   <input class="btn btn-primary mt-3" type="submit" name="Update" value="Update">
+                 </form>
+
+    				</div>
+    			</div>
+
+    		</div>
+
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						          <th></th>
+						          <th></th>
+						          <th>Product name</th>
+						          <th>Quantity</th>
+						          <th>Status</th>
+								  <th>&nbsp;</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+							<form method="POST" action="">
+								{% csrf_token %}
+							    {% for order in orders.items.all %}
+						      <tr class="text-center">
+								  <td scope="row">{{ forloop.counter }}</td>
+						        <td class="image-prod"><div class="img" style="background-image:url({{order.item.images}});"></div></td>
+
+						        <td class="product-name">
+						        	<h3>{{order.item.title}}</h3>
+						        </td>
+
+						        <td class="price">{{order.quantity}}</td>
+
+						        <td class="quantity">{{order.status}}
+					          </td>
+
+                       <td><a class="btn btn-primary btn-sm"  href="{% url 'updateorderitem' order.id %}">Update</a> </td>
+
+						      </tr><!-- END TR-->
+												                  {% endfor %}
+
+							</form>
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+			</div>
+		</section>
+
+
+
+
+        {% endblock %}

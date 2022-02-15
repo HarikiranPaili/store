@@ -1,0 +1,106 @@
+    {% extends 'base.html' %}
+
+    {% block content %}
+	{% include 'navbar.html' %}
+
+	{% if oops %}
+  <body class="goto-here">
+
+    <section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>&nbsp;</th>
+						        <th>&nbsp;</th>
+						        <th>Product name</th>
+						        <th>Price</th>
+						        <th>Quantity</th>
+						        <th>Total</th>
+						        <th>Amount saved</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+							{% for order_item in object.items.all %}
+						      <tr class="text-center">
+						        <td class="product-remove"><a href="{{ order_item.item.get_remove_from_cart_url }}"><span class="ion-ios-close"></span></a></td>
+						        <td class="image-prod"><div class="img" style="background-image:url({{order_item.item.images}});"></div></td>
+						        <td class="product-name">
+						        	<h3>{{ order_item.item.title }}</h3>
+						        	<p>{{ order_item.item.description|truncatewords:10 }}</p>
+						        </td>
+								  {% if order_item.item.discount_price %}
+						        <td class="price">Rs.{{ order_item.item.discount_price }}</td>
+								  {% else %}
+						        <td class="price">Rs.{{ order_item.item.price }}</td>
+								  {% endif %}
+						        <td class="quantity">
+						        	<div class="input-group mb-3 mt-3">
+										<a href="{% url 'decrease_item_quantity' order_item.item.slug %}">
+	                	                    <button type="button" class="quantity-left-minus btn mr-2"  data-type="minus" data-field="">
+	                    <i class="ion-ios-remove"></i>
+	                	</button>
+										</a>
+										<p name="quantity" class=" py-3  form-control input-number  ">{{ order_item.quantity }}</p>
+										<a href="{% url 'increase_item_quantity' order_item.item.slug %}">
+											<button type="button" class="quantity-right-plus btn ml-2" data-type="plus" data-field="">
+	                     <i class="ion-ios-add"></i>
+	                     </button>
+										</a>
+					          	</div>
+					          </td>
+						         {% if order_item.item.discount_price %}
+								  <td class="total">Rs.{{ order_item.get_total_discount_item_price }}</td>
+						          <td class="total">{{ order_item.get_amount_saved }}</td>
+								  {% else %}
+						        <td class="total">Rs.{{ order_item.get_total_item_price }}</td>
+								  {% endif %}
+						      </tr><!-- END TR-->
+
+
+							 {% endfor %}
+
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+    		<div class="row justify-content-end">
+				<div class="col-6 cart-wrap ftco-animate">
+    				<div class="cart-total mb-3">
+    					<h3>Cart Totals</h3>
+    					<p class="d-flex">
+    						<span>Subtotal</span>
+    						<span>Rs.{{ object.get_total }}</span>
+    					</p>
+    					<p class="d-flex">
+    						<span>Delivery charges</span>
+    						<span>Rs.50.00</span>
+    					</p>
+    					<p class="d-flex">
+    						<span>Total Saved</span>
+    						<span>Rs.{{ object.get_total_saved }}</span>
+    					</p>
+    					<hr>
+    					<p class="d-flex total-price">
+    						<span>Total</span>
+    						<span>Rs.{{ object.total_amount }}</span>
+    					</p>
+    				</div>
+    			</div>
+    			<div class="col-3 mt-5 cart-wrap ftco-animate">
+					<p><a href="{% url 'home'%}" class="btn btn-primary py-3 px-4">Continue Shoppng</a></p>
+    			</div>
+    			<div class="col-3 mt-5 cart-wrap ftco-animate">
+					<p><a href="{% url 'checkout'%}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+    			</div>
+    		</div>
+			</div>
+		</section>
+{% else %}
+	<h1>You Don't have any active order</h1>
+	{% endif %}
+                {% endblock %}

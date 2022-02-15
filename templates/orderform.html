@@ -1,0 +1,43 @@
+    {% extends 'base.html' %}
+
+
+    {% block content %}
+
+    <section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th></th>
+						        <th>Customer name</th>
+						        <th>Date of Ordered</th>
+						        <th>Status</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+							{% for order in orders %}
+						      <tr class="text-center">
+								  <td scope="row">{{ forloop.counter }}</td>
+
+						        <td class="product-name">
+									<a href="{% url 'statusupdate' order.id %}">
+						        	<h3>{{order.user.username}}</h3></a>
+						        </td>
+						        <td class="price">{{ order.ordered_date }}</td>
+						        <td class="price">{{ order.status }}</td>
+						      </tr><!-- END TR-->
+
+							 {% endfor %}
+
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+			</div>
+		</section>
+
+        {% endblock %}

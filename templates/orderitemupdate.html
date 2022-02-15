@@ -1,0 +1,50 @@
+    {% extends 'base.html' %}
+
+
+    {% block content %}
+
+    <section class="ftco-section ftco-cart">
+			<div class="container">
+				<div class="row">
+    			<div class="col-md-12 ftco-animate">
+    				<div class="cart-list">
+	    				<table class="table">
+						    <thead class="thead-primary">
+						      <tr class="text-center">
+						        <th>Item name</th>
+						        <th>Quentity</th>
+						        <th>Status</th>
+						        <th></th>
+						      </tr>
+						    </thead>
+						    <tbody>
+						      <tr class="text-center">
+
+						        <td class="product-name">
+									<a href="">
+						        	<h3>{{order.item.title}}</h3></a>
+						        </td>
+						        <td class="price">{{ order.quantity }}</td>
+						        <td >
+									<form method="POST" action="" >
+                                      {% csrf_token %}
+                                         {% for form in form %}
+                                         {{ form }}
+                                         {% endfor %}
+                                </td>
+								  <td class="price"><input class="btn btn-primary ml-3" type="submit" name="Update" value="Update">
+                              </form>
+								  </td>
+
+						      </tr><!-- END TR-->
+
+
+						    </tbody>
+						  </table>
+					  </div>
+    			</div>
+    		</div>
+			</div>
+		</section>
+
+        {% endblock %}

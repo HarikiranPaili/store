@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block content %}
+    {% include 'navbar.html' %}
+
+  <body class="goto-here">
+
+    <div class="hero-wrap hero-bread" style="background-image: url('static/images/bg_1.jpg');">
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+          <div class="col-md-9 ftco-animate text-center">
+          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
+            <h1 class="mb-0 bread">Products</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="ftco-section">
+    	<div class="container">
+    		<div class="row justify-content-center">
+    			<div class="col-md-10 mb-5 text-center">
+    				<ul class="product-category">
+    					<li><a href="{% url 'home' %}" >All</a></li>
+    					<li><a href="{% url 'vegtables' %}">Vegetables</a></li>
+    					<li><a href="{% url 'fruits' %}" class="active">Fruits</a></li>
+    					<li><a href="{% url 'juices' %}">Juice</a></li>
+    					<li><a href="{% url 'dried' %}">Dried</a></li>
+    				</ul>
+    			</div>
+    		</div>
+    		<div class="row">
+				{% for item in items %}
+    			<div class="col-md-6 col-lg-3 ftco-animate">
+    				<div class="product">
+    					<a href="{{ item.get_absolute_url }}" class="img-prod"><img class="img-fluid" src="{{item.images}}" alt="Colorlib Template">
+    						<span class="status"></span>
+    						<div class="overlay"></div>
+    					</a>
+    					<div class="text py-3 pb-4 px-3 text-center">
+    						<h3><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></h3>
+    						<div class="d-flex">
+    							<div class="pricing">
+		    						<p class="price">
+										<span class="price-sale">Rs.
+											{% if item.discount_price %}
+											<span class="mr-2 price-dc">{{ item.price }}</span>
+											<span class="price-sale">Rs.{{ item.discount_price }}</span>
+											{% else %}
+											{{ item.price }}
+											{% endif %}</span></p>
+		    					</div>
+	    					</div>
+	    					<div class="bottom-area d-flex px-3">
+	    						<div class="m-auto d-flex">
+	    							<a href="{{ item.get_absolute_url }}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+	    								<span><i class="ion-ios-menu"></i></span>
+	    							</a>
+	    							<a href="{{ item.get_add_to_cart_url }}" class="buy-now d-flex justify-content-center align-items-center mx-4">
+	    								<span><i class="ion-ios-cart"></i></span>
+	    							</a>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+								{% endfor %}
+
+
+    		</div>
+			{% if is_paginated %}
+    		<div class="row mt-5">
+          <div class="col text-center">
+            <div class="block-27">
+              <ul>
+				  			{% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}"> < </a></li>
+				  			{% endif %}
+
+				  {% for n in page_obj.paginator.page_range %}
+                     {% if page_obj.number == n %}
+                <li class="active"><span>{{ n }}</span></li>
+                     {% elif n > page_obj.number|add:'-3' and n < page_obj.number|add:'3' %}
+                <li ><a href="?page={{ n }}">{{ n }}</a></li>
+                     {% endif %}
+                     {% endfor %}
+
+				  			{% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}"> > </a></li>
+				  			{% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+			{% endif %}
+
+    	</div>
+    </section>
+
+            {% endblock %}
+
+  
