@@ -76,7 +76,6 @@ class HomeView(ListView):
 
 
 def vegtables(request):
-    print(razorpay_id)
     items = Item.objects.filter(category='V')
     context = {'items': items}
     return render(request,'vegtable.html',context)

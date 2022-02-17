@@ -6,7 +6,7 @@ from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',HomeView.as_view(), name='home' ),
-    path('vegtables',vegtables, name='vegtables' ),
+    path('vegs',vegtables, name='vegs' ),
     path('dried',dried, name='dried' ),
     path('juices',juices, name='juices' ),
     path('fruits',fruits, name='fruits' ),
