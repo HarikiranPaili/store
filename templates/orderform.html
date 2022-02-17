@@ -6,7 +6,7 @@
     <section class="ftco-section ftco-cart">
 			<div class="container">
 				<div class="row">
-    			<div class="col-md-12 ftco-animate">
+    			<div class="col-md-12">
     				<div class="cart-list">
 	    				<table class="table">
 						    <thead class="thead-primary">
@@ -22,7 +22,7 @@
 						      <tr class="text-center">
 								  <td scope="row">{{ forloop.counter }}</td>
 
-						        <td class="product-name">
+						        <td class="product-name" style="text-decoration: underline;">
 									<a href="{% url 'statusupdate' order.id %}">
 						        	<h3>{{order.user.username}}</h3></a>
 						        </td>

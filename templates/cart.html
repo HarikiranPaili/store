@@ -9,7 +9,7 @@
     <section class="ftco-section ftco-cart">
 			<div class="container">
 				<div class="row">
-    			<div class="col-md-12 ftco-animate">
+    			<div class="col-md-12">
     				<div class="cart-list">
 	    				<table class="table">
 						    <thead class="thead-primary">
@@ -30,7 +30,6 @@
 						        <td class="image-prod"><div class="img" style="background-image:url({{order_item.item.images}});"></div></td>
 						        <td class="product-name">
 						        	<h3>{{ order_item.item.title }}</h3>
-						        	<p>{{ order_item.item.description|truncatewords:10 }}</p>
 						        </td>
 								  {% if order_item.item.discount_price %}
 						        <td class="price">Rs.{{ order_item.item.discount_price }}</td>
@@ -54,7 +53,7 @@
 					          </td>
 						         {% if order_item.item.discount_price %}
 								  <td class="total">Rs.{{ order_item.get_total_discount_item_price }}</td>
-						          <td class="total">{{ order_item.get_amount_saved }}</td>
+						          <td class="total">RS.{{ order_item.get_amount_saved }}</td>
 								  {% else %}
 						        <td class="total">Rs.{{ order_item.get_total_item_price }}</td>
 								  {% endif %}
@@ -69,7 +68,7 @@
     			</div>
     		</div>
     		<div class="row justify-content-end">
-				<div class="col-6 cart-wrap ftco-animate">
+				<div class="col-6 cart-wrap ">
     				<div class="cart-total mb-3">
     					<h3>Cart Totals</h3>
     					<p class="d-flex">
@@ -91,10 +90,10 @@
     					</p>
     				</div>
     			</div>
-    			<div class="col-3 mt-5 cart-wrap ftco-animate">
+    			<div class="col-3 mt-5 cart-wrap ">
 					<p><a href="{% url 'home'%}" class="btn btn-primary py-3 px-4">Continue Shoppng</a></p>
     			</div>
-    			<div class="col-3 mt-5 cart-wrap ftco-animate">
+    			<div class="col-3 mt-5 cart-wrap">
 					<p><a href="{% url 'checkout'%}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
     			</div>
     		</div>

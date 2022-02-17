@@ -6,12 +6,12 @@
 
   <body class="goto-here">
 
-    <div class="hero-wrap hero-bread" style="background-image: url('static/images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread " style="background-image: url('static/images/bg_1.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
-          <div class="col-md-9 ftco-animate text-center">
-          	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span></p>
-            <h1 class="mb-0 bread">Products</h1>
+          <div class="col-md-9 text-center">
+          	<p class="breadcrumbs"><span class="mr-2"></span> <span>Welcome To Your</span></p>
+            <h1 class="mb-0 bread">Vegstore</h1>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
     		</div>
     		<div class="row">
 				{% for item in object_list %}
-    			<div class="col-md-6 col-lg-3 ftco-animate">
+    			<div class="col-md-6 col-lg-3">
     				<div class="product">
     					<a href="{{ item.get_absolute_url }}" class="img-prod"><img class="img-fluid" src="{{item.images}}" alt="Colorlib Template">
     						<span class="status"></span>
