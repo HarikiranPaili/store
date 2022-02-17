@@ -380,9 +380,9 @@ def cart_qun(user):
     else:
         return 0
 
-#@login_required(login_url='login')
-@method_decorator(login_required, name='dispatch')
 class OrderSummaryView(LoginRequiredMixin, View):
+    login_url = '/login'
+    redirect_field_name = None
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
